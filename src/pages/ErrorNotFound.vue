@@ -18,9 +18,6 @@
         label="Go Home"
         no-caps
       />
-      <div>
-        messi
-      </div>
     </div>
   </div>
 </template>

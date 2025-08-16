@@ -1,43 +1,123 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
+  <q-layout>
+    <q-header>
+      <div>
+        <!-- mobile -->
+        <div v-if="$q.screen.lt.md">
+          <div class="m-head">
+            <!-- hamburger menu -->
+            <q-btn round dense flat icon="menu" class="q-mr-xs">
+              <q-menu transition-show="jump-down" transition-hide="jump-up">
+                <q-list style="min-width: 100px">
+                  <q-item clickable>
+                    <q-item-section>Having fun</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Crazy for transitions</q-item-section>
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable>
+                    <q-item-section>Mind blown</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+            <!-- logo -->
+            <div>
+              <q-img src="/src/assets/image/logo-stack.png" class="logo-head-mb" />
+            </div>
+            <!-- Proudoct -->
+            <q-btn flat label="Prodocts">
+              <q-menu transition-show="rotate" transition-hide="rotate">
+                <q-list style="min-width: 100px">
+                  <q-item clickable>
+                    <q-item-section>Stack Overflow for Teams</q-item-section><br />
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Advertising</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Knowledge Solutions </q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Labs</q-item-section>
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable>
+                    <q-item-section>About the company</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Visit the blog</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+            <!-- search icon -->
+            <q-icon name="search" />
+            <!-- login && Sign Up -->
+            <div class="log-m">
+              <div class="login-btn-m">
+                <q-btn outline style="color: blue" label="Login" size="xs" />
+              </div>
+              <div class="signup-btn-m">
+                <q-btn style="background: blue; color: white" label="SignUp" size="xs" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Desktop -->
+        <div v-else class="l-head">
+          <div>
+            <q-img src="/src/assets/image/logo-stack-overflow.png" class="logo-head" />
+          </div>
+          <div class="btn-head">
+            <q-btn flat color="white" label="About" />
+            |
+            <q-btn flat label="Prodocts">
+              <q-menu transition-show="rotate" transition-hide="rotate">
+                <q-list style="min-width: 100px">
+                  <q-item clickable>
+                    <q-item-section>Stack Overflow for Teams</q-item-section><br />
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Advertising</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Knowledge Solutions </q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Labs</q-item-section>
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable>
+                    <q-item-section>About the company</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section>Visit the blog</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+            |
+            <q-btn flat color="white" label="For Teams" />
+          </div>
+          <div class="search-box">
+            <q-input dark dense standout v-model="text" input-class="text-right" class="q-ml-md">
+              <template v-slot:append>
+                <q-icon v-if="text === ''" name="search" />
+                <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
+              </template>
+            </q-input>
+          </div>
+          <div class="login-btn">
+            <q-btn outline style="color: blue" label="Login" />
+          </div>
+          <div class="signup-btn">
+            <q-btn style="background: blue; color: white" label="SignUp" />
+          </div>
+        </div>
+      </div>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -45,58 +125,63 @@
   </q-layout>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+<script setup></script>
+<style>
+.logo-head {
+  width: 80px;
+  height: 80px;
+  direction: left;
+  /* padding: 5px; */
 }
-</script>
+.logo-head-mb {
+  width: 20px;
+  height: 20px;
+  direction: left;
+}
+.l-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 30px;
+  padding: 2px;
+  background-color: rgb(182, 180, 180);
+  border-top: 2px solid orangered;
+}
+.m-head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+  padding: 1px;
+  background-color: rgb(182, 180, 180);
+  border-top: 1px solid orangered;
+}
+.btn-head {
+  width: 100%;
+  /* padding: 8px; */
+}
+.search-box {
+  width: 100%;
+  height: 100%;
+  padding-right: 6px;
+}
+.log-m {
+  display: flex;
+  justify-content: row;
+  align-items: flex-start;
+  /* help from GPT */
+  flex-direction: row;
+  gap: 5px;
+  /*  */
+}
+.login-btn {
+  padding: 5px;
+}
+.login-btn-m .signup-btn-m {
+  display: inline-flex;
+  padding: 2.5px;
+}
+.signup-btn {
+  padding: 5px;
+}
+</style>

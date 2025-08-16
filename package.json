@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Quasar Project",
   "productName": "stack",
-  "author": "hesan",
+  "author": "hesam",
   "type": "module",
   "private": true,
   "scripts": {
