@@ -84,7 +84,6 @@
           <q-img src="/src/assets/image/logo-stack-overflow.png" class="logo-head" />
         </div>
         <div class="btn-head">
-          
           <q-btn flat color="white" label="About" />
           |
           <q-btn flat label="Prodocts">

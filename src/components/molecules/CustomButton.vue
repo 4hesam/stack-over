@@ -4,6 +4,7 @@
     :color="color"
     :flat="flat"
     :outline="outline"
+    :size="size"
     @click="handleClick"
   />
 </template>
@@ -17,7 +18,8 @@ defineProps({
   label: { type: String, required: true },
   color: { type: String, default: 'blue' },
   flat: { type: Boolean, default: false },
-  outline: { type: Boolean, default: false }
+  outline: { type: Boolean, default: false },
+  size: { type: String, default: 'md' }
 })
 
 // تعریف emit برای رویداد کلیک
