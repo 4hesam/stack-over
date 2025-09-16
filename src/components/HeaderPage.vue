@@ -60,10 +60,10 @@
       </q-menu>
       <!-- login && Sign UP  -->
       <div class="login-btn-m">
-        <CusBtn label="Login" color="blue" outline @click="loginHandler" size="sm" />
+        <CusBtn label="Login" color="blue" outline @click="LoginPage" size="sm" />
       </div>
       <div class="signup-btn-m">
-        <CusBtn label="signup" color="blue" @click="loginHandler" size="sm" />
+        <CusBtn label="signup" color="blue" @click="SignupPage" size="sm" />
       </div>
     </div>
   </div>
@@ -73,7 +73,6 @@
       <div class="left-side">
         <!-- button && icon image-->
         <div class="btn-head">
-
           <q-img src="/src/assets/image/logo-stack-overflow.png" class="logo-head" />
           <q-btn flat label="About" color="black" v-if="$q.screen.gt.sm" />
           <q-btn flat label="Prodocts" color="black">
@@ -109,10 +108,10 @@
           <CusSearchBar :debounce="500" icon="search" @search="searchHandler" />
         </div>
         <div class="login-btn">
-          <CusBtn label="Login" color="blue" outline @click="loginHandler" />
+          <CusBtn label="Login" color="blue" outline @click="LoginPage" />
         </div>
         <div class="signup-btn">
-          <CusBtn label="SignUp" color="blue" @click="loginHandler" />
+          <CusBtn label="SignUp" color="blue" @click="SignupPage" />
         </div>
       </div>
     </div>
@@ -122,6 +121,14 @@
 <script setup>
 import CusBtn from 'src/components/molecules/CustomButton.vue'
 import CusSearchBar from 'src/components/molecules/CustomSearchBar.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+function LoginPage() {
+  router.push('/login')
+}
+function SignupPage() {
+  router.push('/Signup')
+}
 function searchHandler(value) {
   console.log('Search value:', value)
 }
@@ -179,13 +186,13 @@ function searchHandler(value) {
   /* width: 1000px; */
   display: flex;
 }
-.right-side{
+.right-side {
   display: flex;
   align-items: center;
   gap: 10px;
   flex: 1;
 }
-.search-box{
+.search-box {
   width: 100%;
 }
 </style>
