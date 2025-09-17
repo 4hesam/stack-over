@@ -2,7 +2,7 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    children: [{ path: '', component: () => import('pages/HomePage.vue') }],
   },
 
   // Always leave this as last one,
@@ -11,12 +11,9 @@ const routes = [
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
   },
-  {path: '/login',
-    component:() => import('components/LoginPage.vue'),
-  },
-  {path: '/signup',
-    component:() => import('components/SignupPage.vue'),
-  },
+  { path: '/login', component: () => import('components/LoginPage.vue') },
+  { path: '/signup', component: () => import('components/SignupPage.vue') },
+  { path: '/ask', component: () => import('components/AddQuestion.vue') },
 ]
 
 export default routes

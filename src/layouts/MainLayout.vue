@@ -4,7 +4,7 @@
       <HeaderPage />
     </q-header>
     <q-page-container>
-      <HomePage />
+      <!-- <HomePage /> -->
       <router-view />
     </q-page-container>
   </q-layout>
@@ -12,7 +12,7 @@
 
 <script setup>
 import HeaderPage from 'src/components/HeaderPage.vue'
-import HomePage from 'src/pages/HomePage.vue'
+// import HomePage from 'src/pages/HomePage.vue'
 </script>
 
 <style></style>

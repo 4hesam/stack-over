@@ -1,6 +1,5 @@
 <template>
-  <div class="q-pa-md">
-    <q-layout>
+  <q-layout class="q-pa-md">
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="500">
         <q-scroll-area class="fit">
           <q-list padding class="menu-list">
@@ -77,9 +76,13 @@
         </q-scroll-area>
       </q-drawer>
     </q-layout>
-  </div>
+  <!-- </div> -->
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+
+const drawer = ref(false)
+</script>
 
 <style></style>

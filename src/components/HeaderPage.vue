@@ -20,7 +20,7 @@
             </q-menu>
           </q-btn>
         </div>
-        <div class="logo-head-mb"><q-img src="/src/assets/image/logo-stack.png" /></div>
+        <div class="logo-head-mb"><q-img src="/src/assets/image/logo-stack.png" @click="HomePage" /></div>
         <div>
           <q-btn flat label="Prodocts" color="black">
             <q-menu transition-show="rotate" transition-hide="rotate">
@@ -73,7 +73,7 @@
       <div class="left-side">
         <!-- button && icon image-->
         <div class="btn-head">
-          <q-img src="/src/assets/image/logo-stack-overflow.png" class="logo-head" />
+          <q-img src="/src/assets/image/logo-stack-overflow.png" class="logo-head" @click="HomePage" />
           <q-btn flat label="About" color="black" v-if="$q.screen.gt.sm" />
           <q-btn flat label="Prodocts" color="black">
             <q-menu transition-show="rotate" transition-hide="rotate">
@@ -123,10 +123,14 @@ import CusBtn from 'src/components/molecules/CustomButton.vue'
 import CusSearchBar from 'src/components/molecules/CustomSearchBar.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-function LoginPage() {
+
+const HomePage = () => {
+  router.push('/')
+}
+const LoginPage = () => {
   router.push('/login')
 }
-function SignupPage() {
+const SignupPage = () => {
   router.push('/Signup')
 }
 function searchHandler(value) {

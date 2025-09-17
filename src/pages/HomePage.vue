@@ -9,4 +9,12 @@
 import sidebar from 'src/components/SideBar.vue'
 import HomeQuestion from 'src/components/HomeQuestion.vue'
 </script>
-<style></style>
+<style>
+.home {
+  display: flex;
+  justify-content: baseline;
+}
+.side-bar{
+  border: 2px solid red;
+}
+</style>
