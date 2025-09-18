@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="q-pa-md">
+  <div class="q-pa-md">
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="500">
         <q-scroll-area class="fit">
           <q-list padding class="menu-list">
@@ -75,7 +75,7 @@
           </q-list>
         </q-scroll-area>
       </q-drawer>
-    </q-layout>
+    </div>
   <!-- </div> -->
 </template>
 

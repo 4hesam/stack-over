@@ -4,6 +4,7 @@
       <HeaderPage />
     </q-header>
     <q-page-container>
+      <sidebar />
       <!-- <HomePage /> -->
       <router-view />
     </q-page-container>
@@ -11,6 +12,7 @@
 </template>
 
 <script setup>
+import sidebar from 'src/components/SideBar.vue'
 import HeaderPage from 'src/components/HeaderPage.vue'
 // import HomePage from 'src/pages/HomePage.vue'
 </script>

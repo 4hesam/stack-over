@@ -5,7 +5,7 @@
         <div>
           <q-btn round dense flat icon="menu" class="q-mr-xs" color="black">
             <q-menu transition-show="jump-down" transition-hide="jump-up">
-              <q-list style="min-width: 100px">
+               <q-list style="min-width: 100px">
                 <q-item clickable>
                   <q-item-section>Having fun</q-item-section>
                 </q-item>
@@ -15,8 +15,10 @@
                 <q-separator />
                 <q-item clickable>
                   <q-item-section>Mind blown</q-item-section>
+                  <sidebar />
                 </q-item>
               </q-list>
+
             </q-menu>
           </q-btn>
         </div>
@@ -119,6 +121,7 @@
 </template>
 
 <script setup>
+import sidebar from 'src/components/SideBar.vue'
 import CusBtn from 'src/components/molecules/CustomButton.vue'
 import CusSearchBar from 'src/components/molecules/CustomSearchBar.vue'
 import { useRouter } from 'vue-router'
