@@ -6,8 +6,10 @@
       <q-img src="/src/assets/image/logo-stack.png" class="logo-stack" />
 
       <h4 class="signup-title">Create your account</h4>
+      Username
+      <q-input standout="bg-teal text-white" v-model="username" label="UserName" class="user-btn" />
       Email
-      <q-input standout="bg-teal text-white" v-model="text" label="Email" class="email-btn" />
+      <q-input standout="bg-teal text-white" v-model="email" label="Email" class="email-btn" />
       Password
       <q-input
         v-model="password"
@@ -26,7 +28,7 @@
         </template>
       </q-input>
       <div class="btn-signup1">
-        <q-btn style="background: blue; color: white" label="Sign UP" class="btn-signup" />
+        <q-btn style="background: blue; color: white" label="Sign UP" class="btn-signup" @click="handleregister" />
       </div>
     </div>
   </div>
@@ -34,8 +36,62 @@
 <script setup>
 import HeaderPage from 'src/components/HeaderPage.vue'
 import { ref } from 'vue'
-const password = ref()
+const username = ref('')
+const email = ref('')
+const password = ref('')
 const isPwd = ref(true)
+const error = ref('')
+const token = ref('')
+
+const handleregister = async () => {
+  error.value = ''
+  try {
+const query = `
+  mutation register($input: RegisterInput!) {
+    register(input: $input) {
+      token
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`
+
+    const variables = {
+      input: {
+        username : username.value,
+        email: email.value,
+        password: password.value,
+      },
+    }
+
+    const res = await fetch('http://localhost:4000/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    })
+
+    const result = await res.json()
+
+    if (result.errors) {
+      error.value = result.errors[0].message
+    } else {
+      token.value = result.data.register.token
+      console.log('User:', result.data.register.user)
+    }
+  } catch (err) {
+    error.value = 'خطایی رخ داد!'
+    console.error(err)
+  }
+}
+
 </script>
 
 <style>

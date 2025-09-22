@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <div class="qustion-menu"><HomeQuestion /></div>
+    <div class="qustion-menu"><ListQuestion /></div>
   </div>
 </template>
 
 <script setup>
-import HomeQuestion from 'src/components/ListQuestion.vue'
+import ListQuestion from 'src/components/ListQuestion.vue'
 </script>
 <style>
 .home {

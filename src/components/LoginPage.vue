@@ -7,7 +7,7 @@
 
       <h4 class="login-title">LOGIN</h4>
       Email
-      <q-input standout="bg-teal text-white" v-model="text" label="Email" class="email-btn" />
+      <q-input standout="bg-teal text-white" v-model="email" label="Email" class="email-btn" />
       Password
       <q-input
         v-model="password"
@@ -26,16 +26,74 @@
         </template>
       </q-input>
       <div class="btn-login1">
-        <q-btn style="background: blue; color: white" label="Log in" class="btn-login" />
+        <q-btn
+          style="background: blue; color: white"
+          label="Log in"
+          class="btn-login"
+          @click="handleLogin"
+        />
       </div>
+
+      <div v-if="error" class="text-negative q-mt-md">{{ error }}</div>
+      <div v-if="token" class="text-positive q-mt-md">Token: {{ token }}</div>
     </div>
   </div>
 </template>
 <script setup>
 import HeaderPage from 'src/components/HeaderPage.vue'
 import { ref } from 'vue'
-const password = ref()
+const email = ref('')
+const password = ref('')
 const isPwd = ref(true)
+const error = ref('')
+const token = ref('')
+
+const handleLogin = async () => {
+  error.value = ''
+  try {
+const query = `
+  mutation Login($input: LoginInput!) {
+    login(input: $input) {
+      token
+      user {
+        id
+        email
+      }
+    }
+  }
+`
+
+    const variables = {
+      input: {
+        email: email.value,
+        password: password.value,
+      },
+    }
+
+    const res = await fetch('http://localhost:4000/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    })
+
+    const result = await res.json()
+
+    if (result.errors) {
+      error.value = result.errors[0].message
+    } else {
+      token.value = result.data.login.token
+      console.log('User:', result.data.login.user)
+    }
+  } catch (err) {
+    error.value = 'خطایی رخ داد!'
+    console.error(err)
+  }
+}
 </script>
 
 <style>
