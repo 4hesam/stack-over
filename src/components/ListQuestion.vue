@@ -135,20 +135,19 @@ onMounted(() => {
 .list-question {
   border: 2px solid red;
   width: 100%;
-  margin: 0 auto;
-  max-width: 1200px; /* اگه کل صفحه می‌خوای، اینو بردار */
+  max-width: 1200px;  /* محدودیت عرض وسط صفحه */
+  margin: 0 auto;     /* وسط‌چین */
   padding: 0 24px;
+
   display: flex;
   flex-direction: column;
-  gap: 16px; /* فاصله بین کارت‌ها */
+  gap: 16px;
 }
 .question-card {
-  flex: 1;            /* کارت کش بیاد */
-  width: 100%;        /* پر کنه عرض container رو */
+  width: 100%;        /* پر کنه عرض container */
   min-height: 220px;
   border-radius: 10px;
   box-sizing: border-box;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 /* .question-card:hover {
   transform: translateY(-2px);
