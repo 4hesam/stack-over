@@ -22,7 +22,7 @@
     </div>
     <div>
       <p style="font-size: 18px bold; margin: 10px">Title</p>
-      <p style="font-size: 16px; margin: 10px">
+      <p style="font-size: 12px; margin: 10px">
         Be specific and imagine you’re asking a question to another person.
       </p>
       <q-input
@@ -34,11 +34,108 @@
       />
       <CusBtn label="Next" color="blue" @click="LoginPage" class="next-btn" />
     </div>
+    <p style="font-size: 18px bold; margin: 10px">What are the details of your problem?</p>
+      <p style="font-size: 12px; margin: 10px">
+        intrdue the problem and expand on what you put in the title, Minimum 20 characters.
+      </p>
+    <div class="q-pa-md q-gutter-sm">
+    <q-editor
+      v-model="editor"
+      :definitions="{
+        bold: {label: 'Bold', icon: null, tip: 'My bold tooltip'}
+      }"
+    />
+  </div>
+  <p style="font-size: 18px bold; margin: 10px">What did you try and what were you expecting?</p>
+      <p style="font-size: 12px; margin: 10px">
+        Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20 characters.
+      </p>
+    <div class="q-pa-md q-gutter-sm">
+    <q-editor
+      v-model="editor"
+      :definitions="{
+        bold: {label: 'Bold', icon: null, tip: 'My bold tooltip'}
+      }"
+    />
+  </div>
+  <div>
+    <p style="font-size: 18px bold; margin: 10px">What did you try and what were you expecting?</p>
+      <p style="font-size: 12px; margin: 10px">
+        Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20 characters.
+      </p>
+      <q-select
+        filled
+        v-model="model"
+        multiple
+        :options="options"
+        counter
+        max-values="5"
+        hint="Max 5 selections"
+        style="margin: 10px;"
+      />
+      </div>
   </div>
 </template>
 
 <script setup>
 import CusBtn from 'src/components/molecules/CustomButton.vue'
+import { ref } from 'vue'
+const editor = ref(' text...')
+const model = ref(null)
+
+const options = [
+  'JavaScript',
+  'TypeScript',
+  'Vue.js',
+  'Nuxt.js',
+  'Quasar',
+  'React',
+  'Next.js',
+  'Angular',
+  'Svelte',
+  'SolidJS',
+  'Node.js',
+  'Express.js',
+  'NestJS',
+  'GraphQL',
+  'MongoDB',
+  'PostgreSQL',
+  'MySQL',
+  'SQLite',
+  'Python',
+  'Django',
+  'Flask',
+  'FastAPI',
+  'Ruby',
+  'Ruby on Rails',
+  'PHP',
+  'Laravel',
+  'Symfony',
+  'Go (Golang)',
+  'Rust',
+  'C',
+  'C++',
+  'C#',
+  '.NET',
+  'Java',
+  'Spring Boot',
+  'Kotlin',
+  'Swift',
+  'Objective-C',
+  'Flutter',
+  'Dart',
+  'React Native',
+  'R',
+  'MATLAB',
+  'Scala',
+  'Haskell',
+  'Elixir',
+  'Erlang',
+  'Perl',
+  'Shell Script',
+  'Bash',
+  'PowerShell'
+]
 </script>
 
 <style>
