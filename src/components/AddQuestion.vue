@@ -20,72 +20,162 @@
       <p style="font-size: 12px">Review your question and post it to the site.</p>
     </div>
   </div>
-  <div>
-    <p style="font-size: 18px bold; margin: 10px">Title</p>
-    <p style="font-size: 12px; margin: 10px">
-      Be specific and imagine you’re asking a question to another person.
-    </p>
-    <q-input
-      outlined
-      v-model="ph"
-      placeholder="e.g Is there an R function for finding the index of an element in a vector?"
-      :dense="dense"
-      class="title-input"
-    />
-    <CusBtn label="Next" color="blue" class="next-btn" />
-  </div>
-  <p style="font-size: 18px bold; margin: 10px">What are the details of your problem?</p>
-  <p style="font-size: 12px; margin: 10px">
-    intrdue the problem and expand on what you put in the title, Minimum 20 characters.
-  </p>
-  <div class="q-pa-md q-gutter-sm">
-    <q-editor
-      v-model="editor"
-      :definitions="{
-        bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
-      }"
-    />
-  </div>
-  <p style="font-size: 18px bold; margin: 10px">What did you try and what were you expecting?</p>
-  <p style="font-size: 12px; margin: 10px">
-    Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
-    characters.
-  </p>
-  <div class="q-pa-md q-gutter-sm">
-    <q-editor
-      v-model="editor"
-      :definitions="{
-        bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
-      }"
-    />
-  </div>
-  <div>
-    <p style="font-size: 18px bold; margin: 10px">What did you try and what were you expecting?</p>
-    <p style="font-size: 12px; margin: 10px">
-      Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
-      characters.
-    </p>
-    <q-select
-      filled
-      v-model="model"
-      multiple
-      :options="options"
-      counter
-      max-values="5"
-      hint="Max 5 selections"
-      style="margin: 10px"
-    />
-  </div>
+  <div class="q-pa-md">
+  <q-stepper v-model="step" vertical color="primary" animated>
+    <q-step
+      :name="1"
+      title="Select campaign settings"
+      icon="settings"
+      :done="step > 1"
+    >
+      <p style="font-size: 18px; font-weight: bold; margin: 10px">Title</p>
+      <p style="font-size: 12px; margin: 10px">
+        Be specific and imagine you’re asking a question to another person.
+      </p>
+      <q-input
+        outlined
+        v-model="ph"
+        placeholder="e.g Is there an R function for finding the index of an element in a vector?"
+        :dense="dense"
+        class="title-input"
+      />
+      <q-stepper-navigation>
+        <q-btn @click="step = 2" color="primary" label="Continue" />
+      </q-stepper-navigation>
+    </q-step>
+
+    <q-step
+      :name="2"
+      title="Create an ad group"
+      caption="Optional"
+      icon="create_new_folder"
+      :done="step > 2"
+    >
+      <p style="font-size: 18px; font-weight: bold; margin: 10px">
+        What are the details of your problem?
+      </p>
+      <p style="font-size: 12px; margin: 10px">
+        intrdue the problem and expand on what you put in the title, Minimum 20 characters.
+      </p>
+      <div class="q-pa-md q-gutter-sm">
+        <q-editor
+          v-model="editor"
+          :definitions="{
+            bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
+          }"
+        />
+      </div>
+      <q-stepper-navigation>
+        <q-btn @click="step = 3" color="primary" label="Continue" />
+        <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
+      </q-stepper-navigation>
+    </q-step>
+
+    <q-step
+      :name="3"
+      title="Ad template"
+      icon="assignment"
+      :done="step > 3"
+    >
+      <p style="font-size: 18px; font-weight: bold; margin: 10px">
+        What did you try and what were you expecting?
+      </p>
+      <p style="font-size: 12px; margin: 10px">
+        Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
+        characters.
+      </p>
+      <div class="q-pa-md q-gutter-sm">
+        <q-editor
+          v-model="editor"
+          :definitions="{
+            bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
+          }"
+        />
+      </div>
+      <q-stepper-navigation>
+        <q-btn @click="step = 4" color="primary" label="Continue" />
+        <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
+      </q-stepper-navigation>
+    </q-step>
+
+    <q-step
+      :name="4"
+      title="Create an ad"
+      icon="add_comment"
+      :done="step > 4"
+    >
+      <div>
+        <p style="font-size: 18px; font-weight: bold; margin: 10px">
+          What did you try and what were you expecting?
+        </p>
+        <p style="font-size: 12px; margin: 10px">
+          Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
+          characters.
+        </p>
+        <q-select
+          filled
+          v-model="modelMultiple"
+          multiple
+          :options="options"
+          use-chips
+          stack-label
+          max-values="5"
+          label="Tags"
+          style="margin: 10px"
+        />
+      </div>
+      <q-stepper-navigation>
+        <q-btn @click="step = 5" color="primary" label="Continue" />
+        <q-btn flat @click="step = 3" color="primary" label="Back" class="q-ml-sm" />
+      </q-stepper-navigation>
+    </q-step>
+
+    <q-step
+      :name="5"
+      title="Create an ad"
+      icon="add_comment"
+    >
+      <q-page class="q-pa-md column gap-md">
+        <q-select
+          filled
+          v-model="feedback"
+          :options="feedbackOptions"
+          label="Get private feedback in Staging Ground"
+          emit-value
+          map-options
+        />
+        <div class="q-mt-sm text-caption text-grey">
+          انتخاب شده: {{ feedback }}
+        </div>
+        <q-select
+          filled
+          v-model="post"
+          :options="postOptions"
+          label="Post question on Stack Overflow now"
+          emit-value
+          map-options
+        />
+        <div class="q-mt-sm text-caption text-grey">
+          انتخاب شده: {{ post }}
+        </div>
+      </q-page>
+      <q-stepper-navigation>
+        <q-btn color="primary" label="Finish" />
+        <q-btn flat @click="step = 4" color="primary" label="Back" class="q-ml-sm" />
+      </q-stepper-navigation>
+    </q-step>
+  </q-stepper>
+</div>
+
   <!-- </div> -->
 </template>
-
 <script setup>
 import CusBtn from 'src/components/molecules/CustomButton.vue'
 import { ref } from 'vue'
 const editor = ref(' text...')
 const ph = ref('')
 const dense = ref(false)
-const model = ref(null)
+const modelMultiple = ref(null)
 
 const options = [
   'JavaScript',
@@ -139,6 +229,20 @@ const options = [
   'Shell Script',
   'Bash',
   'PowerShell',
+];
+const feedback = ref(null)
+const post = ref(null)
+
+const feedbackOptions = [
+  { label: 'I want experienced community members to review my question', value: 'review' },
+  { label: 'I want to improve my question', value: 'improve' },
+  { label: 'I can wait for an answer', value: 'wait' }
+]
+
+const postOptions = [
+  { label: 'I am sure that my question follows all guidelines', value: 'guidelines' },
+  { label: 'I am confident in my question', value: 'confident' },
+  { label: 'I need answers immediately', value: 'immediate' }
 ]
 </script>
 
@@ -164,125 +268,3 @@ const options = [
   margin: 10px;
 }
 </style>
-<!--
-<template>
-  <div class="q-pa-md">
-    <q-stepper
-      v-model="step"
-      vertical
-      color="primary"
-      animated
-    >
-      <q-step
-        :name="1"
-        title="Select campaign settings"
-        icon="settings"
-        :done="step > 1"
-      >
-        <p style="font-size: 18px bold; margin: 10px">Title</p>
-    <p style="font-size: 12px; margin: 10px">
-      Be specific and imagine you’re asking a question to another person.
-    </p>
-    <q-input
-      outlined
-      v-model="ph"
-      placeholder="e.g Is there an R function for finding the index of an element in a vector?"
-      :dense="dense"
-      class="title-input"
-    />
-
-        <q-stepper-navigation>
-          <q-btn @click="step = 2" color="primary" label="Continue" />
-        </q-stepper-navigation>
-      </q-step>
-
-      <q-step
-        :name="2"
-        title="Create an ad group"
-        caption="Optional"
-        icon="create_new_folder"
-        :done="step > 2"
-      >
-<p style="font-size: 18px bold; margin: 10px">What are the details of your problem?</p>
-  <p style="font-size: 12px; margin: 10px">
-    intrdue the problem and expand on what you put in the title, Minimum 20 characters.
-  </p>
-  <div class="q-pa-md q-gutter-sm">
-    <q-editor
-      v-model="editor"
-      :definitions="{
-        bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
-      }"
-    />
-  </div>
-        <q-stepper-navigation>
-          <q-btn @click="step = 4" color="primary" label="Continue" />
-          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-        </q-stepper-navigation>
-      </q-step>
-
-      <q-step
-        :name="3"
-        title="Ad template"
-        icon="assignment"
-        disable
-      >
-<p style="font-size: 18px bold; margin: 10px">What did you try and what were you expecting?</p>
-  <p style="font-size: 12px; margin: 10px">
-    Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
-    characters.
-  </p>
-  <div class="q-pa-md q-gutter-sm">
-    <q-editor
-      v-model="editor"
-      :definitions="{
-        bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
-      }"
-    />
-  </div>      </q-step>
-
-      <q-step
-        :name="4"
-        title="Create an ad"
-        icon="add_comment"
-      >
-        <div>
-    <p style="font-size: 18px bold; margin: 10px">What did you try and what were you expecting?</p>
-    <p style="font-size: 12px; margin: 10px">
-      Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
-      characters.
-    </p>
-    <q-select
-      filled
-      v-model="model"
-      multiple
-      :options="options"
-      counter
-      max-values="5"
-      hint="Max 5 selections"
-      style="margin: 10px"
-    />
-  </div>
-
-        <q-stepper-navigation>
-          <q-btn color="primary" label="Finish" />
-          <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
-        </q-stepper-navigation>
-      </q-step>
-    </q-stepper>
-  </div>
-</template>
--->
-<!--
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup () {
-    return {
-      step: ref(1)
-    }
-  }
-}
-</script>
--->
