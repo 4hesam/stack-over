@@ -21,162 +21,163 @@
     </div>
   </div>
   <div class="q-pa-md">
-  <q-stepper v-model="step" vertical color="primary" animated>
-    <q-step
-      :name="1"
-      title="Select campaign settings"
-      icon="settings"
-      :done="step > 1"
-    >
-      <p style="font-size: 18px; font-weight: bold; margin: 10px">Title</p>
-      <p style="font-size: 12px; margin: 10px">
-        Be specific and imagine you’re asking a question to another person.
-      </p>
-      <q-input
-        outlined
-        v-model="ph"
-        placeholder="e.g Is there an R function for finding the index of an element in a vector?"
-        :dense="dense"
-        class="title-input"
-      />
-      <q-stepper-navigation>
-        <q-btn @click="step = 2" color="primary" label="Continue" />
-      </q-stepper-navigation>
-    </q-step>
-
-    <q-step
-      :name="2"
-      title="Create an ad group"
-      caption="Optional"
-      icon="create_new_folder"
-      :done="step > 2"
-    >
-      <p style="font-size: 18px; font-weight: bold; margin: 10px">
-        What are the details of your problem?
-      </p>
-      <p style="font-size: 12px; margin: 10px">
-        intrdue the problem and expand on what you put in the title, Minimum 20 characters.
-      </p>
-      <div class="q-pa-md q-gutter-sm">
-        <q-editor
-          v-model="editor"
-          :definitions="{
-            bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
-          }"
+    <q-stepper v-model="step" vertical color="primary" animated>
+      <q-step :name="1" title="Select campaign settings" icon="settings" :done="step > 1">
+        <p style="font-size: 18px; font-weight: bold; margin: 10px">Title</p>
+        <p style="font-size: 12px; margin: 10px">
+          Be specific and imagine you’re asking a question to another person.
+        </p>
+        <q-input
+          outlined
+          v-model="ph"
+          placeholder="e.g Is there an R function for finding the index of an element in a vector?"
+          :dense="dense"
+          class="title-input"
         />
-      </div>
-      <q-stepper-navigation>
-        <q-btn @click="step = 3" color="primary" label="Continue" />
-        <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-      </q-stepper-navigation>
-    </q-step>
+        <q-stepper-navigation>
+          <q-btn @click="step = 2" color="primary" label="Continue" :disable="!ph" />
+        </q-stepper-navigation>
+      </q-step>
 
-    <q-step
-      :name="3"
-      title="Ad template"
-      icon="assignment"
-      :done="step > 3"
-    >
-      <p style="font-size: 18px; font-weight: bold; margin: 10px">
-        What did you try and what were you expecting?
-      </p>
-      <p style="font-size: 12px; margin: 10px">
-        Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
-        characters.
-      </p>
-      <div class="q-pa-md q-gutter-sm">
-        <q-editor
-          v-model="editor"
-          :definitions="{
-            bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
-          }"
-        />
-      </div>
-      <q-stepper-navigation>
-        <q-btn @click="step = 4" color="primary" label="Continue" />
-        <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
-      </q-stepper-navigation>
-    </q-step>
+      <q-step
+        :name="2"
+        title="Create an ad group"
+        caption="Optional"
+        icon="create_new_folder"
+        :done="step > 2"
+      >
+        <p style="font-size: 18px; font-weight: bold; margin: 10px">
+          What are the details of your problem?
+        </p>
+        <p style="font-size: 12px; margin: 10px">
+          intrdue the problem and expand on what you put in the title, Minimum 20 characters.
+        </p>
+        <div class="q-pa-md q-gutter-sm">
+          <q-editor
+            v-model="editor"
+            :definitions="{
+              bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
+            }"
+          />
+        </div>
+        <q-stepper-navigation>
+          <q-btn @click="step = 3" color="primary" label="Continue" :disable="!ph" />
+          <q-btn
+            flat
+            @click="step = 1"
+            color="primary"
+            label="Back"
+            class="q-ml-sm"
+            :disable="!ph"
+          />
+        </q-stepper-navigation>
+      </q-step>
 
-    <q-step
-      :name="4"
-      title="Create an ad"
-      icon="add_comment"
-      :done="step > 4"
-    >
-      <div>
+      <q-step :name="3" title="Ad template" icon="assignment" :done="step > 3">
         <p style="font-size: 18px; font-weight: bold; margin: 10px">
           What did you try and what were you expecting?
         </p>
         <p style="font-size: 12px; margin: 10px">
-          Discribe what you tried, what you expected to happen, and what actually resuted, Minimum 20
-          characters.
+          Discribe what you tried, what you expected to happen, and what actually resuted, Minimum
+          20 characters.
         </p>
-        <q-select
-          filled
-          v-model="modelMultiple"
-          multiple
-          :options="options"
-          use-chips
-          stack-label
-          max-values="5"
-          label="Tags"
-          style="margin: 10px"
-        />
-      </div>
-      <q-stepper-navigation>
-        <q-btn @click="step = 5" color="primary" label="Continue" />
-        <q-btn flat @click="step = 3" color="primary" label="Back" class="q-ml-sm" />
-      </q-stepper-navigation>
-    </q-step>
+        <div class="q-pa-md q-gutter-sm">
+          <q-editor
+            v-model="editor"
+            :definitions="{
+              bold: { label: 'Bold', icon: null, tip: 'My bold tooltip' },
+            }"
+          />
+        </div>
+        <q-stepper-navigation>
+          <q-btn @click="step = 4" color="primary" label="Continue" :disable="!ph" />
+          <q-btn
+            flat
+            @click="step = 2"
+            color="primary"
+            label="Back"
+            class="q-ml-sm"
+            :disable="!ph"
+          />
+        </q-stepper-navigation>
+      </q-step>
 
-    <q-step
-      :name="5"
-      title="Create an ad"
-      icon="add_comment"
-    >
-      <q-page class="q-pa-md column gap-md">
-        <q-select
-          filled
-          v-model="feedback"
-          :options="feedbackOptions"
-          label="Get private feedback in Staging Ground"
-          emit-value
-          map-options
-        />
-        <div class="q-mt-sm text-caption text-grey">
-          انتخاب شده: {{ feedback }}
+      <q-step :name="4" title="Create an ad" icon="add_comment" :done="step > 4">
+        <div>
+          <p style="font-size: 18px; font-weight: bold; margin: 10px">
+            What did you try and what were you expecting?
+          </p>
+          <p style="font-size: 12px; margin: 10px">
+            Discribe what you tried, what you expected to happen, and what actually resuted, Minimum
+            20 characters.
+          </p>
+          <q-select
+            filled
+            v-model="modelMultiple"
+            multiple
+            :options="options"
+            use-chips
+            stack-label
+            :max-values="5"
+            label="Tags"
+            style="margin: 10px"
+          />
         </div>
-        <q-select
-          filled
-          v-model="post"
-          :options="postOptions"
-          label="Post question on Stack Overflow now"
-          emit-value
-          map-options
+        <q-stepper-navigation>
+          <q-btn @click="step = 5" color="primary" label="Continue" :disable="!ph" />
+          <q-btn
+            flat
+            @click="step = 3"
+            color="primary"
+            label="Back"
+            class="q-ml-sm"
+            :disable="!ph"
+          />
+        </q-stepper-navigation>
+      </q-step>
+
+      <q-step :name="5" title="Create an ad" icon="add_comment">
+        <q-btn-toggle
+          v-model="secondModel"
+          spread
+          class="my-custom-toggle"
+          no-caps
+          rounded
+          unelevated
+          toggle-color="primary"
+          color="white"
+          text-color="primary"
+          :options="[
+            {
+              label: 'Get private feedback in Staging Ground',
+              value: 'Get private feedback in Staging Ground',
+            },
+            {
+              label: 'Post question on Stack Overflow now',
+              value: 'Post question on Stack Overflow now',
+            },
+          ]"
         />
-        <div class="q-mt-sm text-caption text-grey">
-          انتخاب شده: {{ post }}
-        </div>
-      </q-page>
-      <q-stepper-navigation>
-        <q-btn color="primary" label="Finish" />
-        <q-btn flat @click="step = 4" color="primary" label="Back" class="q-ml-sm" />
-      </q-stepper-navigation>
-    </q-step>
-  </q-stepper>
-</div>
+        <q-stepper-navigation>
+          <q-btn color="primary" label="Finish" :disable="!ph" />
+          <q-btn flat @click="step = 4" color="primary" label="Back" class="q-ml-sm" />
+        </q-stepper-navigation>
+      </q-step>
+    </q-stepper>
+    <q-step :name="6" title="Create an ad" icon="add_comment"> </q-step>
+  </div>
 
   <!-- </div> -->
 </template>
+
 <script setup>
-import CusBtn from 'src/components/molecules/CustomButton.vue'
+//import CusBtn from 'src/components/molecules/CustomButton.vue'
 import { ref } from 'vue'
 const editor = ref(' text...')
 const ph = ref('')
 const dense = ref(false)
 const modelMultiple = ref(null)
-
+const step = ref(1)
 const options = [
   'JavaScript',
   'TypeScript',
@@ -229,21 +230,22 @@ const options = [
   'Shell Script',
   'Bash',
   'PowerShell',
-];
-const feedback = ref(null)
-const post = ref(null)
-
-const feedbackOptions = [
-  { label: 'I want experienced community members to review my question', value: 'review' },
-  { label: 'I want to improve my question', value: 'improve' },
-  { label: 'I can wait for an answer', value: 'wait' }
 ]
+const secondModel = ref('one')
+// const feedback = ref(null)
+// const post = ref(null)
 
-const postOptions = [
-  { label: 'I am sure that my question follows all guidelines', value: 'guidelines' },
-  { label: 'I am confident in my question', value: 'confident' },
-  { label: 'I need answers immediately', value: 'immediate' }
-]
+// const feedbackOptions = [
+//   { label: 'I want experienced community members to review my question', value: 'review' },
+//   { label: 'I want to improve my question', value: 'improve' },
+//   { label: 'I can wait for an answer', value: 'wait' },
+// ]
+
+// const postOptions = [
+//   { label: 'I am sure that my question follows all guidelines', value: 'guidelines' },
+//   { label: 'I am confident in my question', value: 'confident' },
+//   { label: 'I need answers immediately', value: 'immediate' },
+// ]
 </script>
 
 <style>
