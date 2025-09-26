@@ -7,7 +7,7 @@
             <q-menu transition-show="jump-down" transition-hide="jump-up">
                <q-list style="min-width: 100px">
                 <q-item clickable>
-                  <q-item-section>Having fun</q-item-section>
+                  <q-item-section><sidebar />></q-item-section>
                 </q-item>
                 <q-item clickable>
                   <q-item-section>Crazy for transitions</q-item-section>

@@ -22,7 +22,7 @@
   </div>
   <div class="q-pa-md">
     <q-stepper v-model="step" vertical color="primary" animated>
-      <q-step :name="1" title="Select campaign settings" icon="settings" :done="step > 1">
+      <q-step :name="1" title="Title" icon="settings" :done="step > 1">
         <p style="font-size: 18px; font-weight: bold; margin: 10px">Title</p>
         <p style="font-size: 12px; margin: 10px">
           Be specific and imagine you’re asking a question to another person.
@@ -41,7 +41,7 @@
 
       <q-step
         :name="2"
-        title="Create an ad group"
+        title="What are the details of your problem?"
         caption="Optional"
         icon="create_new_folder"
         :done="step > 2"
@@ -73,7 +73,7 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="3" title="Ad template" icon="assignment" :done="step > 3">
+      <q-step :name="3" title="What did you try and what were you expecting?" icon="assignment" :done="step > 3">
         <p style="font-size: 18px; font-weight: bold; margin: 10px">
           What did you try and what were you expecting?
         </p>
@@ -102,7 +102,7 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="4" title="Create an ad" icon="add_comment" :done="step > 4">
+      <q-step :name="4" title="Tags" icon="add_comment" :done="step > 4">
         <div>
           <p style="font-size: 18px; font-weight: bold; margin: 10px">
             What did you try and what were you expecting?
@@ -136,7 +136,7 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="5" title="Create an ad" icon="add_comment">
+      <q-step :name="5" title="Select where your question should be posted. " icon="add_comment">
         <q-btn-toggle
           v-model="secondModel"
           spread
@@ -232,20 +232,6 @@ const options = [
   'PowerShell',
 ]
 const secondModel = ref('one')
-// const feedback = ref(null)
-// const post = ref(null)
-
-// const feedbackOptions = [
-//   { label: 'I want experienced community members to review my question', value: 'review' },
-//   { label: 'I want to improve my question', value: 'improve' },
-//   { label: 'I can wait for an answer', value: 'wait' },
-// ]
-
-// const postOptions = [
-//   { label: 'I am sure that my question follows all guidelines', value: 'guidelines' },
-//   { label: 'I am confident in my question', value: 'confident' },
-//   { label: 'I need answers immediately', value: 'immediate' },
-// ]
 </script>
 
 <style>
@@ -259,7 +245,7 @@ const secondModel = ref('one')
   background-color: rgb(146, 225, 252);
   opacity: 90%;
   padding: 15px;
-  width: fit-content;
+  /* width: fit-content;  */
   margin: 10px;
 }
 .title-input {
