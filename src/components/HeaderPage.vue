@@ -109,12 +109,24 @@
         <div class="search-box">
           <CusSearchBar :debounce="500" icon="search" @search="searchHandler" />
         </div>
-        <div class="login-btn">
+        <div>
+        <template v-if="!userStore.isLoggedIn">
+          <div class="login-btn">
           <CusBtn label="Login" color="blue" outline @click="LoginPage" />
         </div>
         <div class="signup-btn">
           <CusBtn label="SignUp" color="blue" @click="SignupPage" />
         </div>
+      </template>
+        <q-avatar
+        v-else
+        size="40px"
+        class="curser-pointer"
+        @click="router.push('/profile')"
+        >
+      <q-img :src="userStore.profileImg || 'https://cdn.quasar.dev/img/avatar.png'" />
+    </q-avatar>
+  </div>
       </div>
     </div>
   </div>
@@ -125,8 +137,9 @@ import sidebar from 'src/components/SideBar.vue'
 import CusBtn from 'src/components/molecules/CustomButton.vue'
 import CusSearchBar from 'src/components/molecules/CustomSearchBar.vue'
 import { useRouter } from 'vue-router'
+import {useUserStore} from 'src/stores/user.js'
 const router = useRouter()
-
+const userStore = useUserStore()
 const HomePage = () => {
   router.push('/')
 }

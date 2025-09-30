@@ -40,8 +40,10 @@
   </div>
 </template>
 <script setup>
+import {useUserStore} from 'src/stores/user.js'
 import HeaderPage from 'src/components/HeaderPage.vue'
 import { ref } from 'vue'
+const userStore = useUserStore()
 const email = ref('')
 const password = ref('')
 const isPwd = ref(true)
@@ -52,16 +54,16 @@ const handleLogin = async () => {
   error.value = ''
   try {
 const query = `
-  mutation Login($input: LoginInput!) {
-    login(input: $input) {
-      token
-      user {
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    token
+    user {
         id
         email
-      }
+        }
     }
-  }
-`
+    }
+    `
 
     const variables = {
       input: {
@@ -88,6 +90,15 @@ const query = `
     } else {
       token.value = result.data.login.token
       console.log('User:', result.data.login.user)
+      const loggedUser = result.data.login.user
+
+      userStore.login({
+        id:loggedUser.id,
+        email: loggedUser.id,
+        token:token.value,
+        profileImg:'https://cdn.quasar.dev/img/avatar.png'
+      })
+      console.log('User logged in:', userStore.user)
     }
   } catch (err) {
     error.value = 'خطایی رخ داد!'
